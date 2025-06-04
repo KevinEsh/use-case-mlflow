@@ -2,7 +2,7 @@
     "image": "mcr.microsoft.com/devcontainers/universal:2",
     "features": {
         "ghcr.io/astronomer/devcontainer-features/astro-cli:1": {
-            "version": "v1.9.0"
+            "version": "v1.34.0"
         }
     },
     "postCreateCommand": "bash -i -c 'astro dev start -n --wait 5m'",
@@ -10,6 +10,7 @@
         9090,
         9001,
         8080,
-        5000
+        5000,
+        5432
     ]
 }
