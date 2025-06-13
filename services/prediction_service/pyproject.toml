@@ -1,0 +1,16 @@
+[project]
+name = "prediction-service"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.38.36",
+    "fastapi[standard]~=0.115",
+    "mlflow~=3.1",
+]
+
+[dependency-groups]
+dev = [
+    "requests~=2.32",
+]
