@@ -40,14 +40,17 @@ services:
     env_file: .env
 
   prediction_service:
-    build: ./services/prediction_service
+    image: ps:latest
     networks:
       - airflow
+    # volumes:
+    #   - ${PWD}/services/prediction_service:/app
     ports:
-      - "8000:8000"
-    environment:
-      - MLFLOW_TRACKING_URI=http://mlflow:5000
-      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+      - 8000:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  
+    restart: always
+    env_file: .env
     depends_on:
       - mlflow
       - minio

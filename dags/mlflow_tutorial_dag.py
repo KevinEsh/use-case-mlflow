@@ -13,6 +13,7 @@ from astro.dataframes.pandas import DataFrame
 from mlflow_provider.hooks.client import MLflowClientHook
 from mlflow_provider.operators.registry import CreateRegisteredModelOperator
 from pendulum import datetime
+from sklearn.pipeline import make_pipeline
 
 ## MLFlow parameters
 MLFLOW_CONN_ID = "mlflow_default"
@@ -126,9 +127,12 @@ def training_pipeline():
 
         train_bundle_path, dictvect_path = train_files
         x_train, y_train = load_pickle(train_bundle_path)
+        dictvect = load_pickle(dictvect_path)
         lin_reg_model = LinearRegression()
 
-        mlflow.sklearn.autolog(log_datasets=False)
+        pipeline = make_pipeline(dictvect, lin_reg_model)
+
+        mlflow.sklearn.autolog(log_datasets=False, log_models=False)
         with mlflow.start_run(experiment_id=experiment_id, run_name="lin_reg") as run:
             # X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
             # mlflow.sklearn.log_model(scaler, artifact_path="scaler")
@@ -139,6 +143,7 @@ def training_pipeline():
                     "model_size": lin_reg_model.__sizeof__(),
                 }
             )
+            mlflow.sklearn.log_model(pipeline, artifact_path="model")
 
         return
 

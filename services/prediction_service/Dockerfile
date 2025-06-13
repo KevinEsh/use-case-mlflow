@@ -36,8 +36,8 @@ ENV PATH="/app/.venv/bin:$PATH"
 ENV MLFLOW_S3_ENDPOINT_URL=http://172.17.0.1:9000
 ENV MLFLOW_TRACKING_URI=http://172.17.0.1:5000
 # ENV MLFLOW_S3_BUCKET=mlflowdata
-ENV AWS_ACCESS_KEY_ID=minioadmin
-ENV AWS_SECRET_ACCESS_KEY=minioadmin
+# ENV AWS_ACCESS_KEY_ID=minioadmin
+# ENV AWS_SECRET_ACCESS_KEY=minioadmin
 
 # Reset the entrypoint, don't invoke `uv`
 # Elimina cualquier entrypoint heredado de la imagen base.
